@@ -21,11 +21,37 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+
+
+
+	<ItemGroup>
+	  <None Remove="Images\flag-checkered-solid.svg" />
+	  <None Remove="Images\stopwatch-solid.svg" />
+	</ItemGroup>
+
+
+
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Images\flag-checkered-solid.svg" />
+	  <EmbeddedResource Include="Images\stopwatch-solid.svg" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0-preview.92" />
 		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.14" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\SkiaSharpnado\SkiaSharpnado.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Presentation\Views\SessionMap\SessionMap.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 

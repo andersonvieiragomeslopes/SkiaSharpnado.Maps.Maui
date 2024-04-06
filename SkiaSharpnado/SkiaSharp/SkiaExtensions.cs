@@ -1,6 +1,5 @@
 ﻿using SkiaSharp;
 
-using Xamarin.Forms;
 
 namespace SkiaSharpnado.SkiaSharp
 {

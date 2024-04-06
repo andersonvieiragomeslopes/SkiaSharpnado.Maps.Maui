@@ -2,11 +2,10 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using SkiaSharp;
-using SkiaSharp.Views.Forms;
-
+using SkiaSharp.Views.Maui;
+using SkiaSharp.Views.Maui.Controls;
 using SkiaSharpnado.ViewModels;
 
-using Xamarin.Forms;
 
 namespace SkiaSharpnado.SkiaSharp
 {

@@ -1,5 +1,4 @@
-﻿using Xamarin.Forms;
-
+﻿
 namespace SkiaSharpnado
 {
     public static class ColorExtensions
@@ -9,14 +8,14 @@ namespace SkiaSharpnado
             const string alphaFormat = "{0:X2}";
             const string hexFormat = "{0}{1:X2}{2:X2}{3:X2}";
 
-            var red = (int)(color.R * 255);
-            var green = (int)(color.G * 255);
-            var blue = (int)(color.B * 255);
+            var red = (int)(color.Red * 255);
+            var green = (int)(color.Green * 255);
+            var blue = (int)(color.Blue * 255);
 
             string alphaString = string.Empty;
             if (withAlpha)
             {
-                var alpha = (int)(color.A * 255);
+                var alpha = (int)(color.Alpha * 255);
                 alphaString = string.Format(alphaFormat, alpha);
             }
 

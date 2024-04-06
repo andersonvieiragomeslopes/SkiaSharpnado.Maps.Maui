@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SkiaSharp;
+using System;
 
-using SkiaSharp;
 
 namespace SkiaSharpnado.SkiaSharp
 {
