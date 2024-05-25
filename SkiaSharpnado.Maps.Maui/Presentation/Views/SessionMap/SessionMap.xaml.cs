@@ -16,6 +16,7 @@ using SkiaSharpnado.Maps.Presentation.Views.SessionMap;
 using SkiaSharpnado.Maps.Presentation.Views;
 using SkiaSharp.Views.Maui;
 using SkiaSharpnado.SkiaSharp;
+using Maui.GoogleMaps;
 namespace SkiaSharpnado.Maps.Maui.Presentation.Views.SessionMap;
 
 public partial class SessionMap
@@ -43,7 +44,7 @@ public partial class SessionMap
         nameof(InfoColor),
         typeof(Color),
         typeof(SessionMap),
-        Color.Default);
+        Colors.Transparent);
 
     private MarkerShapeLayer _markerLayer;
 
@@ -65,8 +66,8 @@ public partial class SessionMap
     private SKPicture _overlayPicture;
     private SKMatrix _currentMatrix = SKMatrix.MakeIdentity();
 
-    private SKSvg _startImage;
-    private SKSvg _endImage;
+    //private SKSvg _startImage;
+    //private SKSvg _endImage;
     private SKColor _firstImageColor;
     private SKColor _lastImageColor;
     private float _pictureSize;
@@ -178,17 +179,17 @@ public partial class SessionMap
         const string StartImageName = "stopwatch-solid.svg";
         const string EndImageName = "flag-checkered-solid.svg";
 
-        using (var stream = Embedded.Load(StartImageName))
-        {
-            _startImage = new SKSvg();
-            _startImage.Load(stream);
-        }
+        //using (var stream = Embedded.Load(StartImageName))
+        //{
+        //    _startImage = new SKSvg();
+        //    _startImage.Load(stream);
+        //}
 
-        using (var stream = Embedded.Load(EndImageName))
-        {
-            _endImage = new SKSvg();
-            _endImage.Load(stream);
-        }
+        //using (var stream = Embedded.Load(EndImageName))
+        //{
+        //    _endImage = new SKSvg();
+        //    _endImage.Load(stream);
+        //}
 
         _pictureSize = SkiaHelper.ToPixel(20);
         _firstImageColor = SessionMapInfo.SessionPoints.First().MapPointColor.ToSKColor();
@@ -339,7 +340,7 @@ public partial class SessionMap
             return;
         }
 
-        Debug.WriteLine($"MapOnPaintSurface: pos: {GoogleMap.Camera.Position.Latitude}, {GoogleMap.Camera.Position.Longitude}");
+        Debug.WriteLine($"MapOnPaintSurface: pos: {GoogleMap.CameraPosition.Target.Latitude}, {GoogleMap.CameraPosition.Target.Longitude}");
 
         Interlocked.Increment(ref _drawingCount);
 
@@ -444,13 +445,13 @@ public partial class SessionMap
         _markerLayer.UpdateMaxTime(MaxTime);
         _markerLayer.Draw(canvas, _markerPaint);
 
-        if (!DrawFirstAndLastMarker(
-            canvas,
-            sessionPoints.First(),
-            sessionPoints.Last()))
-        {
-            DrawLastMarker(canvas, previousPoint);
-        }
+        //if (!DrawFirstAndLastMarker(
+        //    canvas,
+        //    sessionPoints.First(),
+        //    sessionPoints.Last()))
+        //{
+        //    DrawLastMarker(canvas, previousPoint);
+        //}
 
         _textDistanceLayer.UpdateMaxTime(MaxTime);
         _textDistanceLayer.Draw(canvas, _distanceTextPaint);
@@ -498,49 +499,49 @@ public partial class SessionMap
 
     private bool DrawFirstAndLastMarker(SKCanvas canvas, ISessionDisplayablePoint firstSessionPoint, ISessionDisplayablePoint lastSessionPoint)
     {
-        var firstPoint = _positionConverter[firstSessionPoint.Position].ToSKPoint();
-        var lastPoint = _positionConverter[lastSessionPoint.Position].ToSKPoint();
+        //var firstPoint = _positionConverter[firstSessionPoint.Position].ToSKPoint();
+        //var lastPoint = _positionConverter[lastSessionPoint.Position].ToSKPoint();
 
-        float svgStartMax = Math.Max(_startImage.Picture.CullRect.Width, _startImage.Picture.CullRect.Height);
-        float startScale = _pictureSize / svgStartMax;
+        //float svgStartMax = Math.Max(_startImage.Picture.CullRect.Width, _startImage.Picture.CullRect.Height);
+        //float startScale = _pictureSize / svgStartMax;
 
-        var startMatrix = SKMatrix.MakeIdentity();
-        startMatrix.SetScaleTranslate(
-            startScale,
-            startScale,
-            firstPoint.X - (_pictureSize / 2),
-            firstPoint.Y - (_pictureSize / 2));
+        //var startMatrix = SKMatrix.MakeIdentity();
+        //startMatrix.SetScaleTranslate(
+        //    startScale,
+        //    startScale,
+        //    firstPoint.X - (_pictureSize / 2),
+        //    firstPoint.Y - (_pictureSize / 2));
 
-        using (var picturePaint = new SKPaint()
-        {
-            ColorFilter = SKColorFilter.CreateBlendMode(
-                    InfoColor == Color.Default ? _firstImageColor : InfoColor.ToSKColor(),
-                    SKBlendMode.SrcIn)
-        })
-        {
-            canvas.DrawPicture(_startImage.Picture, ref startMatrix, picturePaint);
-        }
+        //using (var picturePaint = new SKPaint()
+        //{
+        //    ColorFilter = SKColorFilter.CreateBlendMode(
+        //            InfoColor == Color.Default ? _firstImageColor : InfoColor.ToSKColor(),
+        //            SKBlendMode.SrcIn)
+        //})
+        //{
+        //    canvas.DrawPicture(_startImage.Picture, ref startMatrix, picturePaint);
+        //}
 
-        if (lastSessionPoint.Time - MaxTime > TimeSpan.FromSeconds(20))
-        {
-            return false;
-        }
+        //if (lastSessionPoint.Time - MaxTime > TimeSpan.FromSeconds(20))
+        //{
+        //    return false;
+        //}
 
-        float svgEndMax = Math.Max(_endImage.Picture.CullRect.Width, _endImage.Picture.CullRect.Height);
-        float endScale = _pictureSize / svgEndMax;
+        //float svgEndMax = Math.Max(_endImage.Picture.CullRect.Width, _endImage.Picture.CullRect.Height);
+        //float endScale = _pictureSize / svgEndMax;
 
-        var endMatrix = SKMatrix.MakeIdentity();
-        endMatrix.SetScaleTranslate(endScale, endScale, lastPoint.X, lastPoint.Y - _pictureSize);
+        //var endMatrix = SKMatrix.MakeIdentity();
+        //endMatrix.SetScaleTranslate(endScale, endScale, lastPoint.X, lastPoint.Y - _pictureSize);
 
-        using (var picturePaint = new SKPaint()
-        {
-            ColorFilter = SKColorFilter.CreateBlendMode(
-                    InfoColor == Color.Default ? _lastImageColor : InfoColor.ToSKColor(),
-                    SKBlendMode.SrcIn)
-        })
-        {
-            canvas.DrawPicture(_endImage.Picture, ref endMatrix, picturePaint);
-        }
+        //using (var picturePaint = new SKPaint()
+        //{
+        //    ColorFilter = SKColorFilter.CreateBlendMode(
+        //            InfoColor == Color.Default ? _lastImageColor : InfoColor.ToSKColor(),
+        //            SKBlendMode.SrcIn)
+        //})
+        //{
+        //    canvas.DrawPicture(_endImage.Picture, ref endMatrix, picturePaint);
+        //}
 
         return true;
     }
@@ -549,5 +550,4 @@ public partial class SessionMap
     {
         canvas.DrawCircle(lastPoint.X, lastPoint.Y, SkiaHelper.ToPixel(3), _lastMarkerPaint);
     }
-}
 }

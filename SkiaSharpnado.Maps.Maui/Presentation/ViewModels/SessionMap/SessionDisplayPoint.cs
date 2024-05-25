@@ -46,7 +46,7 @@ namespace SkiaSharpnado.Maps.Presentation.ViewModels.SessionMap
             Position = position;
             Distance = distance;
 
-            MapPointColor = Color.Default;
+            //MapPointColor = Color.Default;
             HasMarker = hasMarker;
             Label = label;
         }

@@ -40,6 +40,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Onion.Maui.GoogleMaps" Version="5.0.3" />
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0-preview.92" />
 		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.14" />
 	</ItemGroup>

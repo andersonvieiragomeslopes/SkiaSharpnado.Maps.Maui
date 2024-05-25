@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Maui.Maps;
+using Maui.GoogleMaps;
 using SkiaSharpnado.Maps.Domain;
 
 
@@ -11,8 +11,8 @@ namespace SkiaSharpnado.Maps.Presentation.ViewModels.SessionMap
     {
         public SessionMapInfo(
             IReadOnlyList<SessionDisplayablePoint> sessionPoints,
-            Location bottomLeft,
-            Location topRight,
+            Position bottomLeft,
+            Position topRight,
             int totalDurationInSeconds)
         {
             SessionPoints = sessionPoints;
@@ -99,7 +99,7 @@ namespace SkiaSharpnado.Maps.Presentation.ViewModels.SessionMap
                     displayDistance);
 
                 Color mapPointColor =
-                    colorBaseValueSelector(currentPoint) ?? previousPoint?.MapPointColor ?? Color.Gray;
+                    colorBaseValueSelector(currentPoint) ?? previousPoint?.MapPointColor ?? Colors.Gray;
 
                 currentPoint.SetPointColor(mapPointColor);
                 previousPoint = currentPoint;
@@ -107,8 +107,8 @@ namespace SkiaSharpnado.Maps.Presentation.ViewModels.SessionMap
 
             return new SessionMapInfo(
                 sessionPoints,
-                new Location(bottomLatitude, leftLongitude),
-                new Location(topLatitude, rightLongitude),
+                new Position(bottomLatitude, leftLongitude),
+                new Position(topLatitude, rightLongitude),
                 previousPoint != null ? (int) previousPoint.Time.TotalSeconds : 0);
         }
 
@@ -116,9 +116,9 @@ namespace SkiaSharpnado.Maps.Presentation.ViewModels.SessionMap
 
         public MapSpan Region { get; }
 
-        public Location BottomLeft { get; }
+        public Position BottomLeft { get; }
 
-        public Location TopRight { get; }
+        public Position TopRight { get; }
 
         public int TotalDurationInSeconds { get; }
     }

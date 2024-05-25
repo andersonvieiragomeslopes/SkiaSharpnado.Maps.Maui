@@ -2,13 +2,13 @@
 using System.Diagnostics;
 
 using SkiaSharpnado.Maps.Domain;
-
+using Map = Maui.GoogleMaps.Map;
 
 namespace SkiaSharpnado.Maps.Presentation.Views
 {
     public static class PositionExtensions
     {
-        public static LatLong ToLatLong(this Location position)
+        public static LatLong ToLatLong(this global::Maui.GoogleMaps.Position position)
         {
             if (position.Latitude == 0 && position.Longitude == 0)
             {
@@ -46,7 +46,7 @@ namespace SkiaSharpnado.Maps.Presentation.Views
 
         public void UpdateCamera(Map mapRendering, Size mapSize, double pixelDensity)
         {
-            UpdateCamera(mapRendering.Camera.Position.ToLatLong(), mapRendering.Camera.Zoom, mapSize, pixelDensity);
+            UpdateCamera(mapRendering.CameraPosition.Target.ToLatLong(), mapRendering.CameraPosition.Zoom, mapSize, pixelDensity);
         }
 
         public void UpdateCamera(LatLong centerLocation, double zoomLevel, Size mapSize, double pixelDensity)

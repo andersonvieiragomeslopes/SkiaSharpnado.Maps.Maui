@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Maui.Maps;
+using Maui.GoogleMaps;
 using SkiaSharpnado.Maps.Presentation.Views;
 
 namespace SkiaSharpnado.Maps.Domain
@@ -148,9 +148,9 @@ namespace SkiaSharpnado.Maps.Domain
                 * Math.Acos((abSquare + bcSquare - acSquare) / (2 * Math.Sqrt(abSquare) * Math.Sqrt(bcSquare)));
         }
 
-        public static MapSpan BoundsToMapSpan(Location bottomLeft, Location topRight)
+        public static MapSpan BoundsToMapSpan(Position bottomLeft, Position topRight)
         {
-            var center = new Location(
+            var center = new Position(
                 (topRight.Latitude + bottomLeft.Latitude) / 2,
                 (topRight.Longitude + bottomLeft.Longitude) / 2);
 
